@@ -11,18 +11,20 @@
     <a href="#" class="w3-bar-item w3-button">Create Event</a>
 </div>
 
+<div style="margin-left:25%">
+
 <div class="w3-container">
     
     <h1>Events</h1>
 
-      {% if events %}
+      {% if event_list %}
       <ul>
 
-        {% for event in events %}
+        {% for event in event_list %}
         <li>
           {{event.title}}
+          {{event.description}}
         </li>
-        <li>{{event.description}}</li>
         {% endfor %}
 
       </ul>
@@ -31,6 +33,7 @@
         <p>There are no events.</p>
       {% endif %}       
   
-  </div>
 
+    </div>
+</div>
 {% endblock %}
