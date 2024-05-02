@@ -43,7 +43,9 @@
   {% endif %}
   <br>
   {% if user.is_staff %}
-    <a href="#" class="w3-bar-item w3-button">Create Event</a>
+    <a href="{% url 'event-create' %}" class="w3-bar-item w3-button">Create Event</a>
+    <a href="{% url 'role-create' %}" class="w3-bar-item w3-button">Create Role</a>
+
   {% endif %}
   {% endblock %}
 </div>

@@ -2,7 +2,9 @@ from django.shortcuts import render
 from .models import Event, Role
 from django.views import generic
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 # Create your views here.
 @login_required
@@ -51,3 +53,19 @@ class HomeView(LoginRequiredMixin, generic.ListView):
             'roles': role,
         }
         return render(request, 'home.html', context)
+    
+class EventCreate(PermissionRequiredMixin, CreateView):
+    model = Event
+    fields = ['name', 'date', 'description', 'public']
+    permission_required = 'website.add_event'
+
+class EventDetailView(generic.DetailView):
+    model = Event
+
+class RoleCreate(PermissionRequiredMixin, CreateView):
+    model = Role
+    fields = ['event', 'name', 'user']
+    permission_required = 'website.add_role'
+
+class RoleDetailView(generic.DetailView):
+    model = Role
