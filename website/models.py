@@ -43,5 +43,4 @@ class Role(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        """Returns the url to access a particular event instance."""
         return reverse('role-detail', args=[str(self.id)])

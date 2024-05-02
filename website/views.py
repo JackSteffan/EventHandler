@@ -2,7 +2,9 @@ from django.shortcuts import render
 from .models import Event, Role
 from django.views import generic
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 # Create your views here.
 @login_required
@@ -28,6 +30,8 @@ def profile(request):
     return render(request, 'profile.html')
 
 class EventsView(LoginRequiredMixin, generic.ListView):
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
     """Generic class-based view for a list of events."""
     def get(self, request):
         event = Event.objects.all()
@@ -38,3 +42,19 @@ class EventsView(LoginRequiredMixin, generic.ListView):
             'roles': role,
         }
         return render(request, 'website/event_list.html', context)
+    
+class EventCreate(PermissionRequiredMixin, CreateView):
+    model = Event
+    fields = ['name', 'date', 'description', 'public']
+    permission_required = 'website.add_event'
+
+class EventDetailView(generic.DetailView):
+    model = Event
+
+class RoleCreate(PermissionRequiredMixin, CreateView):
+    model = Role
+    fields = ['event', 'name', 'user']
+    permission_required = 'website.add_role'
+
+class RoleDetailView(generic.DetailView):
+    model = Role
