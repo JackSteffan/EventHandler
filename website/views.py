@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Event
+from .models import Event, Role
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -25,5 +25,12 @@ def events(request):
 
 class EventsView(LoginRequiredMixin, generic.ListView):
     """Generic class-based view for a list of events."""
-    model = Event
-    paginate_by = 10
+    def get(self, request):
+        event = Event.objects.all()
+        role = Role.objects.all()
+        # Process data as needed
+        context = {
+            'events': event,
+            'roles': role,
+        }
+        return render(request, 'website/event_list.html', context)
