@@ -4,7 +4,25 @@
 <div style="margin-left:25%">
 
 <div class="w3-container">
-    <p>This is generic text</p>
+    
+    <h1>Events</h1>
+
+      {% if events %}
+      <ul>
+
+        {% for event in events %}
+        <li>
+          {{event.title}}
+        </li>
+        <li>{{event.description}}</li>
+        {% endfor %}
+
+      </ul>
+
+      {% else %}
+        <p>There are no events.</p>
+      {% endif %}       
+  
   </div>
 
 </div>
