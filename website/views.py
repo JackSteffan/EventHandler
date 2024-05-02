@@ -23,6 +23,10 @@ def events(request):
     }
     return render(request, 'events.html', context=context)
 
+@login_required
+def profile(request):
+    return render(request, 'profile.html')
+
 class EventsView(LoginRequiredMixin, generic.ListView):
     """Generic class-based view for a list of events."""
     model = Event
