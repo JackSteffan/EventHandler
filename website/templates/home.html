@@ -1,0 +1,59 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div style="margin-left:25%">
+
+<div class="w3-container">
+      {% if events %}
+      {% if user.is_staff %}
+      <h1>My Events</h1>
+      <ul>
+        <div class="row justify-content-around">
+        {% for event in events %}
+          <div class="col-4">
+          {% if event.public == False %}
+          <div class="card" style="width: 20rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{event.name}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{event.date}}</h6>
+              <p class="card-text">{{event.description}}</p>
+              {% for role in roles %}
+              {% if event.name == role.event.name %}
+              <p>{{role.name}}: {{role.user}}</p>
+              {% endif %}
+              {% endfor %}
+              <a href="#" class="w3-bar-item w3-button">Card link</a>
+              <a href="#" class="w3-bar-item w3-button">Another link</a>
+            </div>
+          </div>
+          </div>
+          <div class="col-4">
+            {% if event.public == False %}
+            <div class="card" style="width: 20rem;">
+              <div class="card-body">
+                <h5 class="card-title">{{event.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{event.date}}</h6>
+                <p class="card-text">{{event.description}}</p>
+                {% for role in roles %}
+                {% if event.name == role.event.name %}
+                <p>{{role.name}}: {{role.user}}</p>
+                {% endif %}
+                {% endfor %}
+                <a href="#" class="w3-bar-item w3-button">Card link</a>
+                <a href="#" class="w3-bar-item w3-button">Another link</a>
+              </div>
+            </div>
+            </div>
+          </div>
+          <br>
+          {% endif %}
+          {% endif %}
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% else %}
+        <p>There are no events.</p>
+      {% endif %} 
+  </div>
+</div>
+{% endblock %}
