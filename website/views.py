@@ -11,7 +11,11 @@ def index(request):
 
 @login_required
 def home(request):
-    return render(request, 'index.html')
+    return render(request, 'home.html')
+
+@login_required
+def profile(request):
+    return render(request, 'profile.html')
 
 @login_required
 def events(request):
@@ -22,10 +26,6 @@ def events(request):
         'num_events': num_events
     }
     return render(request, 'events.html', context=context)
-
-@login_required
-def profile(request):
-    return render(request, 'profile.html')
 
 class EventsView(LoginRequiredMixin, generic.ListView):
     """Generic class-based view for a list of events."""
@@ -38,3 +38,16 @@ class EventsView(LoginRequiredMixin, generic.ListView):
             'roles': role,
         }
         return render(request, 'website/event_list.html', context)
+    
+
+class HomeView(LoginRequiredMixin, generic.ListView):
+    """Generic class-based view for a list of events."""
+    def get(self, request):
+        event = Event.objects.all()
+        role = Role.objects.all()
+        # Process data as needed
+        context = {
+            'events': event,
+            'roles': role,
+        }
+        return render(request, 'home.html', context)
