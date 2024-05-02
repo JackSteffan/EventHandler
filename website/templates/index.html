@@ -1,22 +1,44 @@
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
-{% block content %}
+  {% block title %}
+  <header class="w3-container w3-dark-grey">
+    <h1>Event Handler</h1>
+  </header>
+  {% endblock %}
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  
+  <!-- Add additional CSS in static file
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}"> -->
+</head>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+
 <body>
 
-<div class="w3-sidebar w3-bar-block w3-light-grey w3-card" style="width:25%">
+
+
+<div class="w3-sidebar w3-bar-block w3-light-grey w3-card" style="width:25%" id="mySidebar">
+  {% block sidebar %}
   <a href="{% url 'home' %}" class="w3-bar-item w3-button">Home</a>
   <a href="{% url 'events' %}" class="w3-bar-item w3-button">Events</a>
   <a href="#" class="w3-bar-item w3-button">Profile</a>
   <a href="#" class="w3-bar-item w3-button">Logout</a>
   <br>
   <a href="#" class="w3-bar-item w3-button">Create Event</a>
+  {% endblock %}
 </div>
 
+{% block content %}
 <div style="margin-left:25%">
-
-<header class="w3-container w3-dark-grey">
-  <h1>Event Handler</h1>
-</header>
 
 <div class="w3-container">
   <p>Use the w3-card class to display the side navigation as a card (add shadows).</p>
@@ -24,5 +46,5 @@
 
 </div>
       
-</body>
 {% endblock %}
+</body>
