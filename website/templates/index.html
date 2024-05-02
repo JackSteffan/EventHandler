@@ -31,9 +31,18 @@
   <a href="{% url 'home' %}" class="w3-bar-item w3-button">Home</a>
   <a href="{% url 'events' %}" class="w3-bar-item w3-button">Events</a>
   <a href="#" class="w3-bar-item w3-button">Profile</a>
-  <a href="#" class="w3-bar-item w3-button">Logout</a>
+  {% if user.is_authenticated %}
+    <form id="logout-form" method="post" action="{% url 'logout' %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-link">Logout</button>
+    </form>
+  {% else %}
+    <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
+  {% endif %}
   <br>
-  <a href="#" class="w3-bar-item w3-button">Create Event</a>
+  {% if user.is_staff %}
+    <a href="#" class="w3-bar-item w3-button">Create Event</a>
+  {% endif %}
   {% endblock %}
 </div>
 
