@@ -3,7 +3,7 @@
 {% block content %}
 
 <div style="margin-left:25%">
-
+    <div class="w3-container">
 <h1>Name: {{ event.name }}</h1>
 
 <p><strong>Date:</strong> {{ event.date }}</p>
@@ -11,9 +11,9 @@
 <p><strong>Public:</strong> {{ event.public }}</p>
 
 {% if user.is_staff %}
-<a href="{% url 'event-update' pk=event.pk %}" class="w3-bar-item w3-button">Update</a>
+<a href="{% url 'event-update' pk=event.pk %}" class="w3-bar-item w3-button" style="background-color: black; color: white;">Update</a>
 {% endif %}
 
+    </div>
 </div>
-
 {% endblock %}
