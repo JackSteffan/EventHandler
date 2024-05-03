@@ -4,37 +4,10 @@
 <div style="margin-left:25%">
 
 <div class="w3-container">
-      {% if roles %}
-      <h1>My Events</h1>
-      <ul>
-        <div class="row justify-content-around">
-          <div class="col-4">
-        {% for role in roles %}
-         {% if not forloop.counter0|divisibleby:2 %}
-          {% if request.user.username == role.user|striptags %}
-            <div class="card" style="width: 20rem;">
-              <div class="card-body">
-                <h5 class="card-title">{{role.event.name}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{role.event.date}}</h6>
-                <p class="card-text">{{role.event.description}}</p>
-                {% for role1 in roles %}
-                {% if role1.event.name == role.event.name %}
-                <p>{{role1.name}}: {{role1.user}}</p>
-                {% endif %}
-                {% endfor %}
-                <a href="{% url 'event-detail' pk=role.event.pk %}" class="w3-bar-item w3-button">Details</a>
-              </div>
-            </div>
-            <br>
-          {% endif %}
-          {% endif %}
-        {% endfor %}
-      </div>
-      <div class="col-4">
-        {% for role in roles %}
-         {% if forloop.counter0|divisibleby:2 %}
-          {% if request.user.username == role.user|striptags %}
-          <div class="card" style="width: 20rem;">
+  <h1>My Events</h1>
+  <div class="container">
+          {% if roles %}
+          <div class="row"> {% for role in roles %} <div class="col-sm-4"> <div class="card" style="width: 20rem;">
             <div class="card-body">
               <h5 class="card-title">{{role.event.name}}</h5>
               <h6 class="card-subtitle mb-2 text-muted">{{role.event.date}}</h6>
@@ -47,13 +20,10 @@
               <a href="{% url 'event-detail' pk=role.event.pk %}" class="w3-bar-item w3-button">Details</a>
             </div>
           </div>
-          <br>
-          {% endif %}
-          {% endif %}
-        {% endfor %}
-      </div>
+        </div> 
+        {% endfor %} 
+      </div> 
     </div>
-      </ul>
       {% else %}
         <p>There are no events.</p>
       {% endif %} 
