@@ -9,6 +9,10 @@
 <p><strong>Role:</strong> {{ role.name }}</p>
 <p><strong>User:</strong> {{ role.user }}</p>
 
+{% if user.is_staff %}
+<a href="{% url 'role-update' pk=role.pk %}" class="w3-bar-item w3-button">Update</a>
+{% endif %}
+
 </div>
 
 {% endblock %}

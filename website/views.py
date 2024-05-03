@@ -1,3 +1,4 @@
+import unicodedata
 from django.shortcuts import render
 from .models import Event, Role
 from django.views import generic
@@ -34,10 +35,12 @@ class EventsView(LoginRequiredMixin, generic.ListView):
     def get(self, request):
         event = Event.objects.all()
         role = Role.objects.all()
+        orderby = Event.objects.all().order_by('date')
         # Process data as needed
         context = {
             'events': event,
             'roles': role,
+            'orderby': orderby,
         }
         return render(request, 'website/event_list.html', context)
     
@@ -47,10 +50,13 @@ class HomeView(LoginRequiredMixin, generic.ListView):
     def get(self, request):
         event = Event.objects.all()
         role = Role.objects.all()
+        orderby = Event.objects.all().order_by('date')
+
         # Process data as needed
         context = {
             'events': event,
             'roles': role,
+            'orderby': orderby,
         }
         return render(request, 'home.html', context)
     
@@ -62,6 +68,11 @@ class EventCreate(PermissionRequiredMixin, CreateView):
 class EventDetailView(generic.DetailView):
     model = Event
 
+class EventUpdate(PermissionRequiredMixin, UpdateView):
+    model = Event
+    fields = ['name', 'date', 'description', 'public']
+    permission_required = 'website.change_event'
+
 class RoleCreate(PermissionRequiredMixin, CreateView):
     model = Role
     fields = ['event', 'name', 'user']
@@ -69,3 +80,8 @@ class RoleCreate(PermissionRequiredMixin, CreateView):
 
 class RoleDetailView(generic.DetailView):
     model = Role
+
+class RoleUpdate(PermissionRequiredMixin, UpdateView):
+    model = Role
+    fields = ['event', 'name', 'user']
+    permission_required = 'website.change_role'

@@ -9,7 +9,7 @@
       {% if events %}
       <h1>Public Events</h1>
       <ul>
-        {% for event in events %}
+        {% for event in orderby %}
           {% if event.public == True %}
           <div class="card" style="width: 20rem;">
             <div class="card-body">
@@ -21,8 +21,7 @@
               <p>{{role.name}}: {{role.user}}</p>
               {% endif %}
               {% endfor %}
-              <a href="#" class="w3-bar-item w3-button">Card link</a>
-              <a href="#" class="w3-bar-item w3-button">Another link</a>
+              <a href="{% url 'event-detail' pk=event.pk %}" class="w3-bar-item w3-button">Details</a>
             </div>
           </div>
           <br>
@@ -36,7 +35,7 @@
       {% if user.is_staff %}
       <h1>Private events</h1>
       <ul>
-        {% for event in events %}
+        {% for event in orderby %}
           {% if event.public == False %}
           <div class="card" style="width: 20rem;">
             <div class="card-body">
@@ -48,8 +47,7 @@
               <p>{{role.name}}: {{role.user}}</p>
               {% endif %}
               {% endfor %}
-              <a href="#" class="w3-bar-item w3-button">Card link</a>
-              <a href="#" class="w3-bar-item w3-button">Another link</a>
+              <a href="{% url 'event-detail' pk=event.pk %}" class="w3-bar-item w3-button">Details</a>
             </div>
           </div>
           <br>
