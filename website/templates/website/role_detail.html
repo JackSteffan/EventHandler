@@ -3,16 +3,16 @@
 {% block content %}
 
 <div style="margin-left:25%">
-
+    <div class="w3-container">
 <h1>Event: {{ role.event.name }}</h1>
 
 <p><strong>Role:</strong> {{ role.name }}</p>
 <p><strong>User:</strong> {{ role.user }}</p>
 
 {% if user.is_staff %}
-<a href="{% url 'role-update' pk=role.pk %}" class="w3-bar-item w3-button">Update</a>
+<a href="{% url 'role-update' pk=role.pk %}" class="w3-bar-item w3-button"style="background-color: black; color: white;">Update</a>
 {% endif %}
 
 </div>
-
+</div>
 {% endblock %}
