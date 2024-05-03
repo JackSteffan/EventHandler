@@ -18,7 +18,7 @@
               <p class="card-text">{{event.description}}</p>
               {% for role in roles %}
               {% if event.name == role.event.name %}
-              <p>{{role.name}}: {{role.user}}</p>
+              <p><strong>{{role.name}}</strong>: {{role.user}}</p>
               {% endif %}
               {% endfor %}
               <a href="{% url 'event-detail' pk=event.pk %}" class="w3-bar-item w3-button"style="background-color: black; color: white;">Details</a>
@@ -44,7 +44,7 @@
               <p class="card-text">{{event.description}}</p>
               {% for role in roles %}
               {% if event.name == role.event.name %}
-              <p>{{role.name}}: {{role.user}}</p>
+              <p><Strong>{{role.name}}</Strong>: {{role.user}}</p>
               {% endif %}
               {% endfor %}
               <a href="{% url 'event-detail' pk=event.pk %}" class="w3-bar-item w3-button"style="background-color: black; color: white;">Details</a>

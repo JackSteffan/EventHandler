@@ -14,7 +14,7 @@
               <p class="card-text">{{role.event.description}}</p>
               {% for role1 in roles %}
               {% if role1.event.name == role.event.name %}
-              <p>{{role1.name}}: {{role1.user}}</p>
+              <p><strong>{{role1.name}}</strong>: {{role1.user}}</p>
               {% endif %}
               {% endfor %}
               <a href="{% url 'event-detail' pk=role.event.pk %}" class="w3-bar-item w3-button"style="background-color: black; color: white;">Details</a>
