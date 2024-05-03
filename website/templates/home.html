@@ -4,49 +4,47 @@
 <div style="margin-left:25%">
 
 <div class="w3-container">
-      {% if events %}
+      {% if roles %}
       <h1>My Events</h1>
       <ul>
         <div class="row justify-content-around">
           <div class="col-4">
-        {% for event in events %}
+        {% for role in roles %}
          {% if not forloop.counter0|divisibleby:2 %}
-          {% if event.public == False %}
-          <div class="card" style="width: 20rem;">
-            <div class="card-body">
-              <h5 class="card-title">{{event.name}}</h5>
-              <h6 class="card-subtitle mb-2 text-muted">{{event.date}}</h6>
-              <p class="card-text">{{event.description}}</p>
-              {% for role in roles %}
-              {% if event.name == role.event.name %}
-              <p>{{role.name}}: {{role.user}}</p>
-              {% endif %}
-              {% endfor %}
-              <a href="#" class="w3-bar-item w3-button">Card link</a>
-              <a href="#" class="w3-bar-item w3-button">Another link</a>
+          {% if request.user.username == role.user|striptags %}
+            <div class="card" style="width: 20rem;">
+              <div class="card-body">
+                <h5 class="card-title">{{role.event.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{role.event.date}}</h6>
+                <p class="card-text">{{role.event.description}}</p>
+                {% for role1 in roles %}
+                {% if role1.event.name == role.event.name %}
+                <p>{{role1.name}}: {{role1.user}}</p>
+                {% endif %}
+                {% endfor %}
+                <a href="{% url 'event-detail' pk=role.event.pk %}" class="w3-bar-item w3-button">Details</a>
+              </div>
             </div>
-          </div>
-          <br>
+            <br>
           {% endif %}
           {% endif %}
         {% endfor %}
       </div>
       <div class="col-4">
-        {% for event in events %}
+        {% for role in roles %}
          {% if forloop.counter0|divisibleby:2 %}
-          {% if event.public == False %}
+          {% if request.user.username == role.user|striptags %}
           <div class="card" style="width: 20rem;">
             <div class="card-body">
-              <h5 class="card-title">{{event.name}}</h5>
-              <h6 class="card-subtitle mb-2 text-muted">{{event.date}}</h6>
-              <p class="card-text">{{event.description}}</p>
-              {% for role in roles %}
-              {% if event.name == role.event.name %}
-              <p>{{role.name}}: {{role.user}}</p>
+              <h5 class="card-title">{{role.event.name}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{role.event.date}}</h6>
+              <p class="card-text">{{role.event.description}}</p>
+              {% for role1 in roles %}
+              {% if role1.event.name == role.event.name %}
+              <p>{{role1.name}}: {{role1.user}}</p>
               {% endif %}
               {% endfor %}
-              <a href="#" class="w3-bar-item w3-button">Card link</a>
-              <a href="#" class="w3-bar-item w3-button">Another link</a>
+              <a href="{% url 'event-detail' pk=role.event.pk %}" class="w3-bar-item w3-button">Details</a>
             </div>
           </div>
           <br>
@@ -56,7 +54,6 @@
       </div>
     </div>
       </ul>
-      {% endif %}
       {% else %}
         <p>There are no events.</p>
       {% endif %} 
