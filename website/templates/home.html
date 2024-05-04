@@ -7,7 +7,10 @@
   <h1>My Events</h1>
   <div class="container">
           {% if roles %}
-          <div class="row"> {% for role in roles %} <div class="col-sm-4"> <div class="card" style="width: 20rem;">
+          <div class="row"> 
+            {% for role in roles %} 
+            {% if role.user|striptags == user.get_username %}
+            <div class="col-sm-4"> <div class="card" style="width: 20rem;">
             <div class="card-body">
               <h5 class="card-title">{{role.event.name}}</h5>
               <h6 class="card-subtitle mb-2 text-muted">{{role.event.date}}</h6>
@@ -21,6 +24,7 @@
             </div>
           </div>
         </div> 
+        {% endif %}
         {% endfor %} 
       </div> 
     </div>
